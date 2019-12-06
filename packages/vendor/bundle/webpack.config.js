@@ -2,6 +2,7 @@ require('core-js/stable');
 require('regenerator-runtime/runtime');
 
 const path = require('path');
+const webpack = require('webpack');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
@@ -10,6 +11,7 @@ const { modules } = require('@theforeman/vendor-core');
 const { version } = require('../package.json');
 const createVendorEntry = require('./createVendorEntry');
 const WebpackExportForemanVendorPlugin = require('./WebpackExportForemanVendorPlugin');
+const { supportedLanguagesRE } = require('./supportedLanguages');
 
 const projectRoot = path.resolve(__dirname, '../');
 
@@ -17,7 +19,7 @@ const [, webpackMode = 'production'] = process.argv
   .find(arg => arg.startsWith('--mode='))
   .split('=');
 
-const filename = `[name].bundle-v${version}-${webpackMode}-[hash]`;
+const filename = `[name].v${version}-${webpackMode}-[hash]`;
 
 const config = {
   entry: {
@@ -28,7 +30,9 @@ const config = {
 
   output: {
     path: path.resolve(projectRoot, 'dist'),
+    publicPath: '/webpack/',
     filename: `${filename}.js`,
+    chunkFilename: `foreman-vendor-${filename}.js`,
   },
 
   optimization: {
@@ -82,6 +86,16 @@ const config = {
         all: true,
       },
     }),
+    // limit locales from intl only to supported ones
+    new webpack.ContextReplacementPlugin(
+      /intl\/locale-data\/jsonp/,
+      supportedLanguagesRE
+    ),
+    // limit locales from react-intl only to supported ones
+    new webpack.ContextReplacementPlugin(
+      /react-intl\/locale-data/,
+      supportedLanguagesRE
+    ),
   ],
 };
 

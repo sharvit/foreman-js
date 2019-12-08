@@ -12,7 +12,7 @@
 
 - `@theforeman/env/babel` - Adds theforeman babel dev configuration to your project.
 - `@theforeman/env/test` -  Adds theforeman testing tools to you project.
-- WIP: `@theforeman/env/storybook` - Adds theforeman storybook tools to you project.
+- `@theforeman/env/stories` - Adds theforeman storybook tools to you project.
 
 ## Installation
 
@@ -49,6 +49,87 @@ module.exports = {
 }
 ```
 2. create a `test_helper.js` under `/webpack` for extending global mocks if needed
+
+## Stories
+
+### What are stories?
+
+Stories are a playground allow you to develop, document and demo your components in isolation.
+It uses [storybook](https://storybook.js.org/) and some tailor made configurations for foreman plugins.
+
+### Write a story
+
+To create a story for a given component `MyComponent`, first create a story with the file name `MyComponent.stories.js` next to `MyComponent.js`.
+The `tfm-stories` will search for files with the `.stories.js` extention.
+
+```
+•
+└── webpack
+    └── components
+        └── MyComponent
+            ├── MyComponent.js
+            └── MyComponent.stories.js
+```
+
+```js
+// MyComponent.js
+import React from 'react';
+
+const MyComponent = ({ opened, setOpened }) => (
+  <button onClick={() => setOpened(!opened)}>
+    {opened ? 'OPEN' : 'CLOSE'}
+  </button>
+);
+
+export default MyComponent;
+
+// MyComponent.stories.js
+import React from 'react';
+import { storiesOf, action, withKnobs, boolean } from '@theforeman/env/stories';
+import MyComponent from './MyComponent';
+
+const stories = storiesOf(
+  'MyComponent|MyComponent/MyComponent',
+  module
+).addDecorator(withKnobs);
+
+stories.add('MyComponent', () => (
+  <MyComponent setOpened={action('setOpened')} opened={boolean('opened')} />
+));
+
+```
+
+### Run stories development server
+
+```bash
+tfm-stories [options]
+```
+
+```
+Options:
+  -V, --version                output the version number
+  --plugin                     Use for a foreman-plugin
+  -p, --port <number>          Port to run Stories (default: 6006)
+  -s, --setup-file <filename>  Stories global setup file.
+  -h, --help                   output usage information
+```
+
+### Build stories
+
+```bash
+tfm-build-stories [options]
+```
+
+```
+Options:
+  -V, --version                output the version number
+  --plugin, --plugin           Use for a foreman-plugin
+  -s, --setup-file <filename>  Stories global setup file.
+  -o, --output-dir <dir-name>  Directory where to store built files
+  -w, --watch                  Enable watch mode
+  -q, --quiet                  Suppress verbose build output
+  -h, --help                   output usage information
+```
 
 ## Contributing
 

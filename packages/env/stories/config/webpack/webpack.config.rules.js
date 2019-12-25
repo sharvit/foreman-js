@@ -1,6 +1,7 @@
 const path = require('path');
 const {
   cwdWebpack,
+  cwdModulesPath,
   vendorCoreModulesPath,
   foremanReactPath,
 } = require('./paths');
@@ -52,21 +53,17 @@ module.exports = async ({ config }) => {
         loader: require.resolve('sass-loader'),
         options: {
           includePaths: [
-            // teach webpack to resolve patternfly dependencies
-            path.resolve(vendorCoreModulesPath, 'patternfly', 'dist', 'sass'),
-            path.resolve(
-              vendorCoreModulesPath,
-              'bootstrap-sass',
-              'assets',
-              'stylesheets'
-            ),
-            path.resolve(
-              vendorCoreModulesPath,
-              'font-awesome-sass',
-              'assets',
-              'stylesheets'
-            ),
-          ],
+            'patternfly/dist/sass',
+            'bootstrap-sass/assets/stylesheets',
+            'font-awesome-sass/assets/stylesheets',
+          ].reduce(
+            (currentResults, currentPath) => [
+              ...currentResults,
+              path.resolve(vendorCoreModulesPath, currentPath),
+              path.resolve(cwdModulesPath, currentPath),
+            ],
+            []
+          ),
         },
       },
     ],

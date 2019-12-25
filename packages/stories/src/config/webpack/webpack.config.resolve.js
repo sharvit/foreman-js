@@ -2,17 +2,17 @@ const {
   foremanReactPath,
   cwdModulesPath,
   foremanModulesPath,
-  envModulesPath,
+  tfmStoriesModulesPath,
   vendorCoreModulesPath,
 } = require('./paths');
 
-module.exports = async ({ config }) => {
+module.exports = ({ config }) => {
   // foremanReact alias
   config.resolve.alias.foremanReact = foremanReactPath;
 
   // node_modules resolver
   config.resolve.modules = [
-    envModulesPath,
+    tfmStoriesModulesPath,
     vendorCoreModulesPath,
     cwdModulesPath,
   ];

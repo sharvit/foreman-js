@@ -3,13 +3,14 @@ const {
   cwdWebpack,
   cwdModulesPath,
   vendorCoreModulesPath,
+  tfmStoriesPath,
   foremanReactPath,
 } = require('./paths');
 
-module.exports = async ({ config }) => {
+module.exports = ({ config }) => {
   const include = process.env.IS_FOREMAN_PLUGIN
-    ? [cwdWebpack, foremanReactPath]
-    : [cwdWebpack];
+    ? [tfmStoriesPath, cwdWebpack, foremanReactPath]
+    : [tfmStoriesPath, cwdWebpack];
 
   // find the javascript rule
   const jsRule = config.module.rules.find(rule =>

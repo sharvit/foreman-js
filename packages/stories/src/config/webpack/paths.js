@@ -8,11 +8,11 @@ const vendorCorePath = path.resolve(
   cwd,
   './node_modules/@theforeman/vendor-core/'
 );
-const envPath = path.resolve(__dirname, '../../../');
+const tfmStoriesPath = path.resolve(__dirname, '../../../');
 
 const cwdModulesPath = path.resolve(cwd, './node_modules');
 const foremanModulesPath = path.resolve(foremanPath, './node_modules');
-const envModulesPath = path.resolve(envPath, './node_modules');
+const tfmStoriesModulesPath = path.resolve(tfmStoriesPath, './node_modules');
 const vendorCoreModulesPath = path.resolve(vendorCorePath, './node_modules');
 
 const cwdWebpack = path.resolve(cwd, 'webpack');
@@ -28,9 +28,9 @@ module.exports = {
   foremanPath,
   foremanReactPath,
   vendorCorePath,
-  envPath,
+  tfmStoriesPath,
   cwdModulesPath,
   foremanModulesPath,
-  envModulesPath,
+  tfmStoriesModulesPath,
   vendorCoreModulesPath,
 };

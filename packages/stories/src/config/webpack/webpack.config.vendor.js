@@ -4,7 +4,7 @@ const { WebpackForemanVendorPlugin, Manifest } = require('@theforeman/vendor');
 const getFilenamesWithExt = (files, ext) =>
   files.filter(f => f.endsWith(ext)).map(f => path.basename(f));
 
-module.exports = async ({ config, mode }) => {
+module.exports = ({ config, mode }) => {
   const vendorManifest = new Manifest(mode);
 
   const vendorJsFiles = getFilenamesWithExt(vendorManifest.files, '.js');

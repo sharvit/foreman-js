@@ -36,5 +36,5 @@ if (setupFile) {
 storybook({
   port,
   mode: 'dev',
-  configDir: path.resolve(__dirname, '../stories/config'),
+  configDir: path.resolve(__dirname, '../src/config'),
 });

@@ -26,7 +26,7 @@ const {
   setupFile = undefined,
   watch = false,
   quiet = false,
-  outputDir = 'public/storybook',
+  outputDir = '.storybook-dist',
 } = program;
 
 if (plugin) {

@@ -42,5 +42,5 @@ storybook({
   quiet,
   mode: 'static',
   outputDir: path.resolve(cwd, outputDir),
-  configDir: path.resolve(__dirname, '../stories/config'),
+  configDir: path.resolve(__dirname, '../src/config'),
 });

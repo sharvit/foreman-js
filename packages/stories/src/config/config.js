@@ -1,13 +1,11 @@
-import { configure } from '@storybook/react';
+import { configure, addDecorator } from '@storybook/react';
+import centered from '@storybook/addon-centered/react';
+import { withKnobs } from '@storybook/addon-knobs';
 
-const req = require.context(
-  `${process.env.CWD}/webpack`,
-  true,
-  /\.stories\.js$/
+addDecorator(withKnobs);
+addDecorator(centered);
+
+configure(
+  require.context(`${process.env.CWD}/webpack`, true, /\.stories\.js$/),
+  module
 );
-
-function loadStories() {
-  req.keys().forEach(filename => req(filename));
-}
-
-configure(loadStories, module);

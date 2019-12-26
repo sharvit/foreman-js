@@ -41,21 +41,19 @@ export default MyComponent;
 
 // MyComponent.stories.js
 import React from 'react';
-import { storiesOf, action, withKnobs, boolean } from '@theforeman/stories/stories';
+import { action, boolean } from '@theforeman/stories';
 import MyComponent from './MyComponent';
 
-const stories = storiesOf(
-  'MyComponent|MyComponent/MyComponent',
-  module
-).addDecorator(withKnobs);
+export default {
+  title: 'MyComponent|MyComponent/MyComponent',
+  component: MyComponent,
+};
 
-stories.add('MyComponent', () => (
-  <MyComponent setOpened={action('setOpened')} opened={boolean('opened')} />
-));
+export const Basic = () => <MyComponent setOpened={action('setOpened')} opened={boolean('opened')} />;
 
 ```
 
-### Run stories development server
+## Run stories development server
 
 ```bash
 tfm-stories [options]
@@ -70,7 +68,7 @@ Options:
   -h, --help                   output usage information
 ```
 
-### Build stories
+## Build stories
 
 ```bash
 tfm-build-stories [options]
@@ -86,6 +84,62 @@ Options:
   -q, --quiet                  Suppress verbose build output
   -h, --help                   output usage information
 ```
+
+## Available storybook addons
+
+### @storybook/addon-actions
+
+[@storybook/addon-actions](https://github.com/storybookjs/storybook/tree/HEAD/addons/actions) can be used to display data received by event handlers in Storybook.
+
+To use it in your stories, import the `action` method from `@theforeman/stories` and assign it to an event handler.
+
+```js
+import { action } from '@theforeman/stories';
+
+export const myByttonStory = () => <Button onClick={action('buttonClicked')}>Click Here</Button>;
+```
+
+### @storybook/addon-knobs
+
+[@storybook/addon-knobs](https://github.com/storybookjs/storybook/tree/master/addons/knobs) allow you to edit props dynamically using the Storybook UI. You can also use Knobs as a dynamic variable inside stories in Storybook.
+
+To use it in your stories, import the knobs that you need from `@theforeman/stories` and assign them to props.
+See available knobs: https://github.com/storybookjs/storybook/tree/master/addons/knobs#available-knobs
+
+```js
+import { boolean, text, number } from '@theforeman/stories';
+
+// Knobs for React props
+export const withAButton = () => (
+  <button disabled={boolean("Disabled", false)}>
+    {text("Label", "Hello Storybook")}
+  </button>
+);
+
+// Knobs as dynamic variables.
+export const asDynamicVariables = () => {
+  const name = text("Name", "Arunoda Susiripala");
+  const age = number("Age", 89);
+
+  const content = `I am ${name} and I'm ${age} years old.`;
+  return <div>{content}</div>;
+};
+```
+
+### @storybook/addon-centered
+
+[@storybook/addon-centered](https://github.com/storybookjs/storybook/tree/master/addons/centered) can be used to center components inside the preview in Storybook.
+
+This will automatically centerize all your stories.
+
+### @storybook/addon-storysource
+
+[@storybook/addon-storysource](https://github.com/storybookjs/storybook/tree/master/addons/storysource) is used to show stories source in the addon panel.
+
+### @storybook/addon-viewport
+
+[@storybook/addon-viewport](https://github.com/storybookjs/storybook/tree/master/addons/viewport) allows your stories to be displayed in different sizes and layouts in Storybook. This helps build responsive components inside of Storybook.
+
 
 ## Contributing
 

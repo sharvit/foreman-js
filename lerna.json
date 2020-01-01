@@ -1,5 +1,5 @@
 {
-  "version": "3.12.1-intl.0",
+  "version": "3.12.1-intl.1",
   "npmClient": "npm",
   "packages": [
     "packages/*"

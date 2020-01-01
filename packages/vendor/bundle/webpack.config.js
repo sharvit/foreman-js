@@ -30,6 +30,7 @@ const config = {
     publicPath: '/webpack/',
     filename: `${filename}.js`,
     chunkFilename: `foreman-vendor-${filename}.js`,
+    jsonpFunction: 'foremanVendorJSONP',
   },
 
   optimization: {

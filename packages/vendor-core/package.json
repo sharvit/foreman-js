@@ -81,7 +81,7 @@
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
     "regenerator-runtime": "^0.13.3",
-    "reselect": "^3.0.1",
+    "reselect": "^4.0.0",
     "seamless-immutable": "^7.1.2",
     "select2": "~3.5.2-browserify",
     "unidiff": "^1.0.0",

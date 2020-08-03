@@ -25,7 +25,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@novnc/novnc": "novnc/noVNC#25b3d49d322b0a7c9ee1e071d93042d70f5176b7 ",
+    "@novnc/novnc": "^1.2.0",
     "@patternfly/patternfly": "^4.16.7",
     "@patternfly/react-core": "^4.23.1",
     "@patternfly/react-icons": "^4.4.2",

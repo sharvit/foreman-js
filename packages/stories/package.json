@@ -38,7 +38,7 @@
     "@storybook/addon-storysource": "^5.2.8",
     "@storybook/addon-viewport": "^5.2.8",
     "@storybook/react": "^5.2.8",
-    "@storybook/source-loader": "^5.2.8",
+    "@storybook/source-loader": "^6.0.20",
     "@theforeman/builder": "^4.14.3",
     "@theforeman/vendor": "^4.14.3",
     "babel-loader": "^8.0.6",
